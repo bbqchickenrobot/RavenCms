@@ -68,7 +68,9 @@
     <Compile Include="Content\Page.cs" />
     <Compile Include="Content\Post.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="ViewModels\ContentViewModel.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="ViewModels\PageViewModel.cs" />
     <Compile Include="Controllers\RavenController.cs" />
     <Compile Include="MapCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

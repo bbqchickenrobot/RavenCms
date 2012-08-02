@@ -12,11 +12,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Raven.Client;
 using Raven.Client.Embedded;
 using RavenCms.Controllers;
+using RavenCms.ViewModels;
 
 namespace RavenCms.Test.Controllers
 {
     [TestClass]
-    public class ContentControllerTest
+    public class ContentControllerTest : IDisposable
     {
         private readonly IDocumentStore _documentStore;
 
@@ -131,6 +132,11 @@ namespace RavenCms.Test.Controllers
 
             //Assert
             Assert.AreEqual("Failure", result.ViewName);
+        }
+
+        public void Dispose()
+        {
+            _documentStore.Dispose();
         }
     }
     

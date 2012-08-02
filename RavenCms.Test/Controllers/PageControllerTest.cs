@@ -6,17 +6,18 @@ using Raven.Client;
 using Raven.Client.Embedded;
 using RavenCms.Content;
 using RavenCms.Controllers;
+using RavenCms.ViewModels;
 
 namespace RavenCms.Test.Controllers
 {
     [TestClass]
-    public class PageControllerTest
+    public class PageControllerTest : IDisposable
     {
         private readonly IDocumentStore _documentStore;
 
         public PageControllerTest()
         {
-            _documentStore = new EmbeddableDocumentStore {RunInMemory = true};
+            _documentStore = new EmbeddableDocumentStore { RunInMemory = true };
             _documentStore.Initialize();
 
             Bootstrap.Bootstrapper.With.AutoMapper().Start();
@@ -55,6 +56,11 @@ namespace RavenCms.Test.Controllers
 
             //Assert
             Assert.AreEqual(404, result.StatusCode);
+        }
+
+        public void Dispose()
+        {
+            _documentStore.Dispose();
         }
     }
 }

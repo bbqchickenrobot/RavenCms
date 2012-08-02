@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
+using RavenCms.ViewModels;
 
 namespace RavenCms.Controllers
 {
@@ -28,11 +29,5 @@ namespace RavenCms.Controllers
             }
             return PartialView("Failure");
         }
-    }
-
-    public class ContentViewModel
-    {
-        public string Id { get; set; }
-        public string Body { get; set; }
     }
 }

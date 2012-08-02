@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
 using RavenCms.Content;
+using RavenCms.ViewModels;
 
 namespace RavenCms.Controllers
 {
@@ -20,12 +21,5 @@ namespace RavenCms.Controllers
             var viewModel = Mapper.Map<PageViewModel>(page);
             return View(viewModel);
         }
-    }
-
-    public class PageViewModel
-    {
-        public int Id { get; set; }
-        public string Body { get; set; }
-        public string Url { get; set; }
     }
 }

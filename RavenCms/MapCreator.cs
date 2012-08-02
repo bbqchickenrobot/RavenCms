@@ -7,6 +7,7 @@ using AutoMapper;
 using Bootstrap.AutoMapper;
 using RavenCms.Content;
 using RavenCms.Controllers;
+using RavenCms.ViewModels;
 
 namespace RavenCms
 {
