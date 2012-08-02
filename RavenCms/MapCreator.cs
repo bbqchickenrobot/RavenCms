@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Bootstrap.AutoMapper;
+using RavenCms.Content;
 using RavenCms.Controllers;
 
 namespace RavenCms
@@ -15,6 +16,8 @@ namespace RavenCms
         {
             mapper.CreateMap<Content.Content, ContentViewModel>();
             mapper.CreateMap<ContentViewModel, Content.Content>();
+
+            mapper.CreateMap<Page, PageViewModel>();
         }
     }
 }

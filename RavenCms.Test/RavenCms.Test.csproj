@@ -116,6 +116,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Controllers\ContentControllerTest.cs" />
+    <Compile Include="Controllers\PageControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
