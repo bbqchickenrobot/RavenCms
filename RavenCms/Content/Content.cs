@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RavenCms.Content
 {
-    class Content : IContent
+    public class Content : IContent
     {
         public string Id { get; set; }
         public string Body { get; set; }
