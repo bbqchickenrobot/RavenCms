@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenCms", "RavenCms\RavenCms.csproj", "{35161F46-DA91-4B97-953E-F82E62F0D8AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenCms.Test", "RavenCms.Test\RavenCms.Test.csproj", "{3C7BF90C-404D-4658-813C-BB4668EAAD4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35161F46-DA91-4B97-953E-F82E62F0D8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35161F46-DA91-4B97-953E-F82E62F0D8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35161F46-DA91-4B97-953E-F82E62F0D8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35161F46-DA91-4B97-953E-F82E62F0D8AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C7BF90C-404D-4658-813C-BB4668EAAD4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7BF90C-404D-4658-813C-BB4668EAAD4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7BF90C-404D-4658-813C-BB4668EAAD4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7BF90C-404D-4658-813C-BB4668EAAD4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
