@@ -19,6 +19,7 @@ namespace RavenCms
             mapper.CreateMap<ContentViewModel, Content.Content>();
 
             mapper.CreateMap<Page, PageViewModel>();
+            mapper.CreateMap<PageViewModel, Page>();
         }
     }
 }

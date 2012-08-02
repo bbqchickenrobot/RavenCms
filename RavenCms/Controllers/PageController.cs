@@ -21,5 +21,16 @@ namespace RavenCms.Controllers
             var viewModel = Mapper.Map<PageViewModel>(page);
             return View(viewModel);
         }
+
+        public PartialViewResult Save(PageViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var page = Mapper.Map<Page>(viewModel);
+                RavenSession.Store(page);
+                return PartialView("Success");
+            }
+            return PartialView("Failure");
+        }
     }
 }
