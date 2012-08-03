@@ -24,14 +24,10 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Show_ReturnsView_IfExists()
+        public void Show_IfExists_ReturnsView()
         {
             //Arrange
-            using (var session = _documentStore.OpenSession())
-            {
-                session.Store(new Page {Id = 1, Body = "My page", Url = "about-us/team/managment" });
-                session.SaveChanges();
-            }
+            StoreSamplePage();
 
             var controller = new PageController { RavenSession = _documentStore.OpenSession() };
             
@@ -45,8 +41,17 @@ namespace RavenCms.Test.Controllers
             Assert.AreEqual("about-us/team/managment", model.Url);
         }
 
+        private void StoreSamplePage()
+        {
+            using (var session = _documentStore.OpenSession())
+            {
+                session.Store(new Page {Id = 1, Body = "My page", Url = "about-us/team/managment"});
+                session.SaveChanges();
+            }
+        }
+
         [TestMethod]
-        public void Show_ReturnsNotFoundView_IfNotExists()
+        public void Show_IfNotExists_ReturnsNotFoundView()
         {
             //Arrange
             var controller = new PageController { RavenSession = _documentStore.OpenSession() };
@@ -57,12 +62,9 @@ namespace RavenCms.Test.Controllers
             //Assert
             Assert.AreEqual(404, result.StatusCode);
         }
-
-
-
-
+        
         [TestMethod]
-        public void Save_StoresInDatabase_IsValid()
+        public void Save_IsValid_StoresInDatabase()
         {
             //Arrange
             var controller = new PageController { RavenSession = _documentStore.OpenSession() };
@@ -82,7 +84,7 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Save_ReturnsSuccessView_IsValid()
+        public void Save_IsValid_ReturnsSuccessView()
         {
             //Arrange
             var controller = new PageController { RavenSession = _documentStore.OpenSession() };
@@ -96,7 +98,7 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Save_DoesNotStore_IsNotValid()
+        public void Save_IsNotValid_DoesNotStore()
         {
             //Arrange
             var controller = new PageController { RavenSession = _documentStore.OpenSession() };
@@ -116,7 +118,7 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Save_ReturnsFailureView_IsNotValid()
+        public void Save_IsNotValid_ReturnsFailureView()
         {
             //Arrange
             var controller = new PageController { RavenSession = _documentStore.OpenSession() };
@@ -124,12 +126,11 @@ namespace RavenCms.Test.Controllers
             controller.ModelState.AddModelError("Body", "Body is too long");
 
             //Act
-            var result = controller.Save(viewModel);
+            var result = (ViewResult)controller.Save(viewModel);
 
             //Assert
             Assert.AreEqual("Failure", result.ViewName);
         }
-
 
         public void Dispose()
         {

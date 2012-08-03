@@ -12,14 +12,14 @@ namespace RavenCms.Controllers
     public class ContentController : RavenController
     {
         [ChildActionOnly]
-        public virtual PartialViewResult Show(string contentName)
+        public virtual ActionResult Show(string contentName)
         {
             var content = RavenSession.Load<Content.Content>(contentName);
             var viewModel = content == null ? new ContentViewModel{Body = contentName} : Mapper.Map<ContentViewModel>(content);
             return PartialView(viewModel);
         }
 
-        public virtual PartialViewResult Save(ContentViewModel viewModel)
+        public virtual ActionResult Save(ContentViewModel viewModel)
         {
             if (ModelState.IsValid)
             {

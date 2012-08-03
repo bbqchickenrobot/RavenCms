@@ -30,14 +30,14 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Show_ReturnsPlaceholderViewModel_DoesNotExist()
+        public void Show_DoesNotExist_ReturnsPlaceholderViewModel()
         {
             //Arrange
             var controller = new ContentController {RavenSession = _documentStore.OpenSession()};
             string contentName = "Slogan";
 
             //Act
-            var result = controller.Show(contentName);
+            var result = (ViewResult)controller.Show(contentName);
             var model = (ContentViewModel)result.Model;
             
             //Assert
@@ -45,28 +45,33 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Show_ReturnsViewModel_LoadFromDatabase()
+        public void Show_Exists_ReturnsViewModel()
         {
             //Arrange
-            using (var session = _documentStore.OpenSession())
-            {
-                var content = new Content.Content {Id = "Slogan", Body = "A good slogan for your website"};
-                session.Store(content);
-                session.SaveChanges();
-            }
+            StoreSampleContent();
 
             var controller = new ContentController { RavenSession = _documentStore.OpenSession() };
             
             //Act
-            var result = controller.Show("Slogan");
+            var result = (ViewResult)controller.Show("Slogan");
             var model = (ContentViewModel)result.Model;
 
             //Assert
             Assert.AreEqual("A good slogan for your website", model.Body);
         }
 
+        private void StoreSampleContent()
+        {
+            using (var session = _documentStore.OpenSession())
+            {
+                var content = new Content.Content {Id = "Slogan", Body = "A good slogan for your website"};
+                session.Store(content);
+                session.SaveChanges();
+            }
+        }
+
         [TestMethod]
-        public void Save_StoresInDatabase_IsValid()
+        public void Save_IsValid_StoresInDatabase()
         {
             //Arrange
             var controller = new ContentController { RavenSession = _documentStore.OpenSession() };
@@ -86,21 +91,21 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Save_ReturnsSuccessView_IsValid()
+        public void Save_IsValid_ReturnsSuccessView()
         {
             //Arrange
             var controller = new ContentController { RavenSession = _documentStore.OpenSession() };
             var viewModel = new ContentViewModel { Id = "Slogan", Body = "My content view model" };
 
             //Act
-            var result = controller.Save(viewModel);
+            var result = (ViewResult)controller.Save(viewModel);
 
             //Assert
             Assert.AreEqual("Success", result.ViewName);
         }
 
         [TestMethod]
-        public void Save_DoesNotStore_IsNotValid()
+        public void Save_IsNotValid_DoesNotStore()
         {
             //Arrange
             var controller = new ContentController { RavenSession = _documentStore.OpenSession() };
@@ -120,7 +125,7 @@ namespace RavenCms.Test.Controllers
         }
 
         [TestMethod]
-        public void Save_ReturnsFailureView_IsNotValid()
+        public void Save_IsNotValid_ReturnsFailureView()
         {
             //Arrange
             var controller = new ContentController { RavenSession = _documentStore.OpenSession() };
@@ -128,7 +133,7 @@ namespace RavenCms.Test.Controllers
             controller.ModelState.AddModelError("Body", "Body is too long");
 
             //Act
-            var result = controller.Save(viewModel);
+            var result = (ViewResult)controller.Save(viewModel);
 
             //Assert
             Assert.AreEqual("Failure", result.ViewName);

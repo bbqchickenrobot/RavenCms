@@ -22,7 +22,7 @@ namespace RavenCms.Controllers
             return View(viewModel);
         }
 
-        public PartialViewResult Save(PageViewModel viewModel)
+        public ActionResult Save(PageViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
