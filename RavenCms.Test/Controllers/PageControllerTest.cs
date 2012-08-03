@@ -47,7 +47,7 @@ namespace RavenCms.Test.Controllers
         {
             using (var session = _documentStore.OpenSession())
             {
-                session.Store(new Page {Id = 1, Body = "My page", Url = "about-us/team/managment"});
+                session.Store(new Page {Id = 1, Body = "My page", Path = "about-us/team/managment"});
                 session.SaveChanges();
             }
         }
@@ -81,7 +81,7 @@ namespace RavenCms.Test.Controllers
             {
                 var page = session.Load<Page>(1);
                 Assert.AreEqual("My page", page.Body);
-                Assert.AreEqual("about-us/team/managment", page.Url);
+                Assert.AreEqual("about-us/team/managment", page.Path);
             }
         }
 

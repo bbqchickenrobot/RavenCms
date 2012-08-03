@@ -16,7 +16,7 @@ namespace RavenCms.Controllers
 
         public ActionResult Show(string url)
         {
-            var page = RavenSession.Query<Page>().SingleOrDefault(p => p.Url == url);
+            var page = RavenSession.Query<Page>().SingleOrDefault(p => p.Path == url);
             if(page == null)
                 return new HttpNotFoundResult();
 

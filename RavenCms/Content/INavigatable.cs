@@ -8,7 +8,7 @@ namespace RavenCms.Content
 {
     interface INavigatable
     {
-        string Url { get; set; }
+        string Path { get; set; }
         string Title { get; set; }
     }
 }
