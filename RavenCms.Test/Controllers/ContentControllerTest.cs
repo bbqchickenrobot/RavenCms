@@ -9,11 +9,11 @@ using AutoMapper;
 using Bootstrap.AutoMapper;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcContrib.TestHelper;
 using Raven.Client;
 using Raven.Client.Embedded;
 using RavenCms.Controllers;
 using RavenCms.ViewModels;
+using Shouldly;
 
 namespace RavenCms.Test.Controllers
 {
@@ -38,7 +38,7 @@ namespace RavenCms.Test.Controllers
             string contentName = "Slogan";
 
             //Act
-            var result = (ViewResult)controller.Show(contentName);
+            var result = (PartialViewResult)controller.Show(contentName);
             var model = (ContentViewModel)result.Model;
             
             //Assert
@@ -54,7 +54,7 @@ namespace RavenCms.Test.Controllers
             var controller = new ContentController { RavenSession = _documentStore.OpenSession() };
             
             //Act
-            var result = (ViewResult)controller.Show("Slogan");
+            var result = (PartialViewResult)controller.Show("Slogan");
             var model = (ContentViewModel)result.Model;
 
             //Assert
@@ -99,10 +99,10 @@ namespace RavenCms.Test.Controllers
             var viewModel = new ContentViewModel { Id = "Slogan", Body = "My content view model" };
 
             //Act
-            var result = (ViewResult)controller.Save(viewModel);
+            var result = (PartialViewResult)controller.Save(viewModel);
 
             //Assert
-            result.AssertViewRendered().ForView("Success");
+            result.ViewName.ShouldBe("Success");
         }
 
         [TestMethod]
@@ -134,10 +134,10 @@ namespace RavenCms.Test.Controllers
             controller.ModelState.AddModelError("Body", "Body is too long");
 
             //Act
-            var result = (ViewResult)controller.Save(viewModel);
+            var result = (PartialViewResult)controller.Save(viewModel);
 
             //Assert
-            result.AssertViewRendered().ForView("Failure");
+            result.ViewName.ShouldBe("Failure");
         }
 
         public void Dispose()
