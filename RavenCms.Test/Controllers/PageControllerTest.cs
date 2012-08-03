@@ -7,6 +7,7 @@ using Raven.Client.Embedded;
 using RavenCms.Content;
 using RavenCms.Controllers;
 using RavenCms.ViewModels;
+using Rhino.Mocks;
 using Shouldly;
 
 namespace RavenCms.Test.Controllers
@@ -133,9 +134,28 @@ namespace RavenCms.Test.Controllers
             result.ViewName.ShouldBe("Failure");
         }
 
+        [TestMethod]
+        public void Add_ReturnView_UseUrlGenerator()
+        {
+            //Arrange
+            var urlGenerator = MockRepository.GenerateMock<IUrlGenerator>();
+            urlGenerator.Expect(x => x.GenerateUrl("aboutus")).Return("aboutus/the-customer-is-king");
+            var controller = new PageController { RavenSession = _documentStore.OpenSession(), UrlGenerator = urlGenerator};
+
+            //Act
+            var result = (PartialViewResult) controller.Add("The Customer is King", "aboutus");
+            var model = (PageViewModel) result.Model;
+
+            //Assert
+            model.Url.ShouldBe("aboutus/the-customer-is-king");
+            model.Title.ShouldBe("The Customer is King");
+        }
+
         public void Dispose()
         {
             _documentStore.Dispose();
         }
     }
+
+    
 }

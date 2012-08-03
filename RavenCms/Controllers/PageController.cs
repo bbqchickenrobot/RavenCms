@@ -12,6 +12,8 @@ namespace RavenCms.Controllers
 {
     public class PageController : RavenController
     {
+        public IUrlGenerator UrlGenerator { get; set; }
+
         public ActionResult Show(string url)
         {
             var page = RavenSession.Query<Page>().SingleOrDefault(p => p.Url == url);
@@ -31,6 +33,14 @@ namespace RavenCms.Controllers
                 return PartialView("Success");
             }
             return PartialView("Failure");
+        }
+
+        public ActionResult Add(string title, string location)
+        {
+            string url = UrlGenerator.GenerateUrl(location);
+            var viewModel = new PageViewModel {Title = title, Url = url};
+
+            return PartialView(viewModel);
         }
     }
 }

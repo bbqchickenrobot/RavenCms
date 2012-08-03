@@ -65,6 +65,7 @@
     <Compile Include="Content\Content.cs" />
     <Compile Include="Content\IContent.cs" />
     <Compile Include="Content\INavigatable.cs" />
+    <Compile Include="Content\IUrlGenerator.cs" />
     <Compile Include="Content\Page.cs" />
     <Compile Include="Content\Post.cs" />
     <Compile Include="Controllers\ContentController.cs" />
