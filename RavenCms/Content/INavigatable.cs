@@ -9,5 +9,6 @@ namespace RavenCms.Content
     interface INavigatable
     {
         string Url { get; set; }
+        string Title { get; set; }
     }
 }
