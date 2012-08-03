@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Bootstrap.AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MvcContrib.TestHelper;
 using Raven.Client;
 using Raven.Client.Embedded;
 using RavenCms.Content;
@@ -91,10 +92,10 @@ namespace RavenCms.Test.Controllers
             var viewModel = new PageViewModel { Id = 1, Body = "My page", Url = "about-us/team/managment" };
 
             //Act
-            var result = (PartialViewResult)controller.Save(viewModel);
+            var result = controller.Save(viewModel);
 
             //Assert
-            Assert.AreEqual("Success", result.ViewName);
+            result.AssertViewRendered().ForView("Success");
         }
 
         [TestMethod]
@@ -126,10 +127,10 @@ namespace RavenCms.Test.Controllers
             controller.ModelState.AddModelError("Body", "Body is too long");
 
             //Act
-            var result = (ViewResult)controller.Save(viewModel);
+            var result = controller.Save(viewModel);
 
             //Assert
-            Assert.AreEqual("Failure", result.ViewName);
+            result.AssertViewRendered().ForView("Failure");
         }
 
         public void Dispose()

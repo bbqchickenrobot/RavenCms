@@ -9,6 +9,7 @@ using AutoMapper;
 using Bootstrap.AutoMapper;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MvcContrib.TestHelper;
 using Raven.Client;
 using Raven.Client.Embedded;
 using RavenCms.Controllers;
@@ -101,7 +102,7 @@ namespace RavenCms.Test.Controllers
             var result = (ViewResult)controller.Save(viewModel);
 
             //Assert
-            Assert.AreEqual("Success", result.ViewName);
+            result.AssertViewRendered().ForView("Success");
         }
 
         [TestMethod]
@@ -136,7 +137,7 @@ namespace RavenCms.Test.Controllers
             var result = (ViewResult)controller.Save(viewModel);
 
             //Assert
-            Assert.AreEqual("Failure", result.ViewName);
+            result.AssertViewRendered().ForView("Failure");
         }
 
         public void Dispose()
